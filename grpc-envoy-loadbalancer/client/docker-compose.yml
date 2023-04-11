@@ -1,0 +1,10 @@
+version: '3'
+services:
+
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      ADDRESS: "${ADDRESS:-localhost:8000}"
+      PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION: "python"
