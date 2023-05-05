@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+// Import the `google/protobuf/empty.proto` file for the Empty message type
+import "google/protobuf/empty.proto";
+
+package postgres;
+
+// Define the gRPC service
+service PostgresService {
+  // Define the RPC method to execute a PostgreSQL query
+  rpc ExecuteQuery(QueryRequest) returns (QueryResponse) {}
+}
+
+// Define the message types for the query request and response
+message QueryRequest {
+  // The PostgreSQL query to execute
+  string query = 1;
+}
+
+message QueryResponse {
+  // The rows returned by the query
+  repeated Row rows = 1;
+
+  // A flag indicating whether the query was successful
+  bool success = 2;
+
+  // An error message if the query was not successful
+  string error = 3;
+}
+
+// Define the message type for a single row of query results
+message Row {
+  // The values in the row
+  repeated Value values = 1;
+}
+
+// Define the message type for a single value in a query result row
+message Value {
+  // The name of the column for this value
+  string column_name = 1;
+
+  // The data type of the column for this value
+  string data_type = 2;
+
+  // The value itself
+  string value = 3;
+}

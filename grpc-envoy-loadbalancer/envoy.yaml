@@ -23,6 +23,11 @@ static_resources:
                   grpc: {}
                 route:
                   cluster: grpc_backend
+              - match:
+                  prefix: "/postgres.PostgresService/"
+                  grpc: {}
+                route:
+                  cluster: grpc_backend
           http_filters:
           - name: envoy.filters.http.router
   clusters:
